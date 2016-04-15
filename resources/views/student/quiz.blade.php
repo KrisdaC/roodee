@@ -41,7 +41,7 @@
 		<hr>
 	@endif
 @endfor
-<button class="btn btn-submit">Submit</button>
+<button class="btn btn-submit">Submit! This is the submit button!</button>
 </form>
 </div>
 @endsection
