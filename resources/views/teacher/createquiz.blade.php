@@ -134,6 +134,7 @@
 				</div>		
 			</div>
 			<div class= "col-lg-2 col-md-2 col-sm-7 col-xs-12">
+				<h3>Add Questions: </h3>
 				<button class="btn btn-primary btn-lg btn-block topbtn" ng-click="addNewMC()">Multiple Choice</button>
 				<button class="btn btn-primary btn-lg btn-block" ng-click="addNewFITB()">Fill in the Blanks</button>
 				<!--<button class="btn btn-primary btn-lg btn-block" ng-click="addNewMC()">Add New MC</button>-->
