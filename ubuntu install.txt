@@ -1,0 +1,36 @@
+1. Setup EC2 with apache (check url when done), php, mysql
+2. Use this link to install laravel
+
+http://tecadmin.net/install-laravel-framework-on-ubuntu/
+
+MAKE SURE TO CHANGE /var/www/laravel to /var/www/html/{site_name}
+
+
+3. Create the virtual host file (name sample is roodee.com.conf)
+4. Add <Directory> at the end of roodee.com.conf
+
+#Sample of roodee.com.conf
+
+<VirtualHost *:80>
+
+        ServerName roodee.com
+        DocumentRoot /var/www/html/roodee/public
+
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory /var/www/laravel>
+                AllowOverride All
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        LogLevel warn
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+<Directory /var/www/html/roodee/public/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>

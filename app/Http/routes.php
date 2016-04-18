@@ -86,6 +86,12 @@ Route::group(['middleware' => ['web']], function() {
 		'middleware' => 'student'
 	]);
 
+	Route::post('/quiz/{quiz}', [
+		'uses' => 'StudentController@postQuiz',
+		'as' => 'student.quiz',
+		'middleware' => 'student'
+	]);
+
 	/*Route::get('/teacher2', ['as' => 'teacher.dashboard', function (Request $request) {
 		if(!session('msg')){
 			echo "hello!";

@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Student;
 use App\Subject;
 use App\Quiz;
+use App\Random;
 
 class StudentController extends Controller
 {
@@ -39,6 +40,37 @@ class StudentController extends Controller
         $auth = auth()->guard('student');
         $student = $auth->user();
         $quiz = Quiz::find($quiz);
-        return view('student.quiz', ['student' => $student, 'quiz' => $quiz]);
+        $rand = new Random();
+        return view('student.quiz', ['student' => $student, 'quiz' => $quiz, 'rand' => $rand]);
+    }
+
+    public function postQuiz(Request $request){
+        $auth = auth()->guard('student');
+        $student = $auth->user();
+        $quiz = Quiz::find($request['quiz_id']);
+        $result = array();
+        $score = 0;
+        //$formData = $request->all();
+        //echo var_dump($formData);
+        $quiz = Quiz::find($request['quiz_id']);
+        foreach($quiz->questions() as $question){
+            array_push($result, $request[$question->id]);
+            array_push($result, $question->answer);
+            if(strtolower($request[$question->id]) == strtolower($question->answer)){
+                array_push($result, 'CORRECT!');
+                $score++;
+                //echo $question->question . $request[$question->id] . "correct!";
+            }else{
+                array_push($result, 'WRONG!');
+                //echo $question->question . $request[$question->id] . "wrong!";
+            }
+            //echo "<br>";
+        }
+        //echo var_dump($result);
+        array_push($result, $score);
+        return view('student.quiz_result', ['student' => $student, 'quiz' => $quiz, 'result' => $result]);
+        //echo $quiz->questions();
+        //echo $request['hello'];
+        //echo $request['1'];
     }
 }
